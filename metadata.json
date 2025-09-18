@@ -1,0 +1,5 @@
+{
+  "name": "Tool Stencil",
+  "description": "An advanced tool to process SVG or raster images by analyzing and grouping similar colors. Users can upload a file, adjust the color similarity tolerance, and export each color group as a separate SVG or PNG file, preserving the original structure and transparency.",
+  "requestFramePermissions": []
+}
