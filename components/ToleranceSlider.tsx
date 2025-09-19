@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface ToleranceSliderProps {
@@ -11,13 +10,14 @@ export const ToleranceSlider: React.FC<ToleranceSliderProps> = ({ value, onChang
   return (
     <div className="w-full">
       <label htmlFor="tolerance" className="block mb-2 text-sm font-medium text-gray-300">
-        Color Similarity Tolerance: <span className="font-bold text-indigo-400">{value}</span>
+        Color Similarity Tolerance: <span className="font-bold text-indigo-400">{value.toFixed(1)}</span>
       </label>
       <input
         id="tolerance"
         type="range"
         min="0"
         max="100"
+        step="0.1"
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         disabled={disabled}
