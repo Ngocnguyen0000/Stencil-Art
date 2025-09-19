@@ -187,7 +187,7 @@ const ReassembledPreview: React.FC<ReassembledPreviewProps> = ({ isSvgSource, co
 
     if (!isSvgSource) {
       return (
-        <div className="w-full h-full flex justify-center items-center bg-[url('data:image/svg+xml,%3csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%20width=%2232%22%20height=%2232%22%20fill=%22none%22%3e%3cpath%20d=%22M0%200h16v16H0zM16%2016h16v16H16z%22%20fill=%22%23475569%22/%3e%3c/svg%3e')] bg-repeat rounded-md">
+        <div className="w-full h-full flex justify-center items-center bg-[url('data:image/svg+xml,%3csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%20width=%2232%22%22height=%2232%22%20fill=%22none%22%3e%3cpath%20d=%22M0%200h16v16H0zM16%2016h16v16H16z%22%20fill=%22%23475569%22/%3e%3c/svg%3e')] bg-repeat rounded-md">
              <canvas ref={canvasRef} className="max-w-full max-h-full object-contain"></canvas>
         </div>
       );
@@ -484,8 +484,8 @@ function App() {
     // Thumbnail
     const allElements = colorGroups.flatMap(g => (g as SVGColorGroup).elements);
     const transformedThumbnailHtml = transformSvgElements(allElements, dimensions);
-    const thumbnailSvgData = createFinalSvgString(transformedThumbnailHtml);
-    zip.file("thumbnail.svg", thumbnailSvgData);
+    const thumbnailSvgData = `<svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="white"/>${transformedThumbnailHtml}</svg>`;
+    zip.file("thumb.svg", thumbnailSvgData);
 
     // Layers
     colorGroups.forEach((group, index) => {
