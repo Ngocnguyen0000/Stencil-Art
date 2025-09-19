@@ -40,7 +40,12 @@ export function processSVG(
 
   elements.forEach(el => {
     const style = window.getComputedStyle(el);
-    const fill = parseColorString(style.fill);
+    let fill = parseColorString(style.fill);
+    const isWhite = fill && fill.r === 255 && fill.g === 255 && fill.b === 255;
+
+    if (isWhite) {
+      fill = { r: 247, g: 247, b: 247 }; // Corresponds to #F7F7F7
+    }
     
     // Một thuộc tính opacity không xác định sẽ mặc định là 1. Điều này xử lý đúng opacity="0".
     const fillOpacity = isNaN(parseFloat(style.fillOpacity)) ? 1 : parseFloat(style.fillOpacity);
@@ -48,6 +53,11 @@ export function processSVG(
     // Chỉ xử lý các phần tử có màu tô hiển thị. Các đường viền (stroke) bị bỏ qua theo yêu cầu.
     if (fill && fillOpacity > 0) {
       const clonedElement = el.cloneNode(true) as SVGElement;
+      
+      // If the original color was white, explicitly set the new fill color on the clone.
+      if (isWhite) {
+        clonedElement.setAttribute('fill', '#F7F7F7');
+      }
       
       // Theo yêu cầu, đảm bảo tất cả các đường viền được loại bỏ khỏi các lớp đầu ra.
       clonedElement.setAttribute('stroke', 'none');
